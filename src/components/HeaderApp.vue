@@ -1,7 +1,15 @@
 <template>
-  <div >
-        <input type="text" placeholder="Cerca un Film" class="mt-2 ms-2" v-model="filmSearched">
-        <a class="btn btn-primary ms-2 mt-2" @click="sendFilmSearched()">Cerca</a>
+  <div class="container">
+    <div class="row align-items-center p-4">
+      <div class="col-4">
+          <h1>Header</h1>
+      </div>
+      <div class="col-8 text-end">
+        <input type="text" placeholder="Cerca un Film" v-model="filmSearched">
+        <a class="btn btn-primary ms-2 " @click="sendFilmSearched()">Cerca</a>
+      </div>
+    </div>
+        
   </div>
 </template>
 

@@ -1,17 +1,20 @@
 <template>
   <div id="app">
     <HeaderApp @filmSearched='setTxtSearched' />
+    <MainApp :films="films" />
   </div>
 </template>
 
 <script>
 import HeaderApp from './components/HeaderApp.vue'
+import MainApp from './components/MainApp.vue'
 import axios from 'axios'
 
 export default {
   name: 'App',
   components: {
     HeaderApp,
+    MainApp,
   },
   data: function(){
     return{
@@ -19,30 +22,15 @@ export default {
       apiLink : 'https://api.themoviedb.org/3/search/',
       movie : 'movie',
       txtSearch : '',
-      filmsOriginalTitle : [],
-      filmsTitle : [],
-      filmsLanguage : [],
-      filmsRate : [],
+      films : []
       }
   },
   methods: {
     APICall() {
       axios.get(`${this.apiLink}${this.movie}${this.apiKey}${this.txtSearch}`)
       .then((result) => {
-
-        this.filmsOriginalTitle=[]
-        this.filmsTitle=[]
-        this.filmsLanguage=[]
-        this.filmsRate=[]
-
-        for(let i=0; i< result.data.results.length; i++){
-          this.filmsOriginalTitle.push( result.data.results[i].original_title)
-          this.filmsTitle.push( result.data.results[i].title)
-          this.filmsLanguage.push( result.data.results[i].original_language)
-          this.filmsRate.push( result.data.results[i].vote_average) 
-        }
-        
-        console.log({'titolo originale' : this.filmsOriginalTitle, 'titolo' : this.filmsTitle, 'lingua' : this.filmsLanguage, 'voto' : this.filmsRate})
+        this.films = result.data.results
+        console.log(this.films)
       })
       .catch((error) => {
         console.warn(error)
@@ -61,5 +49,10 @@ export default {
 
 <style lang="scss">
 @import "~bootstrap/scss/bootstrap";
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 </style>
