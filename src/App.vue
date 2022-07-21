@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
     <HeaderApp />
   </div>
 </template>
@@ -14,10 +13,29 @@ export default {
   components: {
     HeaderApp,
   },
-  data : function(){
-    return {
-      api_key : '290ef3b32debba72662776b92b209938',
+  data: function(){
+    return{
+      apiKey : '?api_key=290ef3b32debba72662776b92b209938',
+      apiLink : 'https://api.themoviedb.org/3/search/',
+      movie : 'movie',
+      txtSearch : '&query=fantozzi',
+      films : [],
+      }
+  },
+  methods: {
+    APICall() {
+      axios.get(`${this.apiLink}${this.movie}${this.apiKey}${this.txtSearch}`)
+      .then((result) => {
+        this.films = result.data.results[1].original_title
+        console.log(this.films)
+      })
+      .catch((error) => {
+        console.warn(error)
+      })
     },
+  },
+  created (){
+    this.APICall()
   }
 }
 </script>
