@@ -7,7 +7,7 @@
                     <li>{{ element.original_title }}</li>
                     <li>{{ element.title }}</li>
                     <li>{{ element.original_language }}</li>
-                    <li>{{ element.vote_average }}</li>
+                    <li>{{ changeValueVote(element.vote_average) }}</li>
                     <li><span :class="`fi fi-${mapLang(element.original_language)}`"></span></li>
                 </ul>
             </div>
@@ -17,7 +17,7 @@
                     <li>{{ element.original_name }}</li>
                     <li>{{ element.name }}</li>
                     <li>{{ element.original_language }}</li>
-                    <li>{{ element.vote_average }}</li>
+                    <li>{{ changeValueVote(element.vote_average) }}</li>
                     <li><span :class="`fi fi-${mapLang(element.original_language)}`"></span></li>
                 </ul>
             </div>
@@ -30,6 +30,11 @@ export default {
     props: {
         films: Array,
         tvs: Array,
+    },
+    data : function(){
+        return{
+
+        }    
     },
     methods:{
         mapLang(lang){
@@ -47,14 +52,45 @@ export default {
             }
         },
         completePosterPath(path){
-            if(path != null){
+            if(path != null || path == ''){
                 path = `https://image.tmdb.org/t/p/w500/${path}`
             }
             else{
                 path ='/defaultw-500.jpg'
             }
             return  path
-        }, 
+        },
+        changeValueVote(vote){
+            console.log(vote)
+            let voteIn5 = Math.ceil((vote*5)/10)
+            console.log(voteIn5)
+            let stars = ''
+            switch(voteIn5){
+                case 0 :
+                    stars = '0'
+                    break
+                case 1 :
+                    stars = '⭐'
+                     break
+                case 2 :
+                    stars = '⭐⭐'
+                    break
+                case 3 :
+                    stars = '⭐⭐⭐'
+                    break
+                case 4 :
+                    stars = '⭐⭐⭐⭐'
+                    break
+                case 5 :
+                    stars = '⭐⭐⭐⭐⭐'
+                    break
+                default :
+                    console.warn('voteIn5 non e\' riconosciuto ',{voteIn5})
+            } 
+            return stars
+
+        } 
+
     }
 }
 </script>
