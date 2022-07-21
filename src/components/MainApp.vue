@@ -1,13 +1,22 @@
 <template>
     <div class="container">
-        <div class="row">
+        <div class="row mt-4">
             <div class="col-6">
-                <ul v-for="( element, index ) in films" :key="index">
-                    <li>{{ films[index].original_title }}</li>
-                    <li>{{ films[index].title }}</li>
-                    <li>{{ films[index].original_language }}</li>
-                    <li>{{ films[index].vote_average }}</li>
-                    <li><span :class="`fi fi-${mapLang(films[index].original_language)}`"></span></li>
+                <ul v-for="element in films" :key="element.id">
+                    <li>{{ element.original_title }}</li>
+                    <li>{{ element.title }}</li>
+                    <li>{{ element.original_language }}</li>
+                    <li>{{ element.vote_average }}</li>
+                    <li><span :class="`fi fi-${mapLang(element.original_language)}`"></span></li>
+                </ul>
+            </div>
+            <div class="col-6">
+                <ul v-for="element in tvs" :key="element.id">
+                    <li>{{ element.original_name }}</li>
+                    <li>{{ element.name }}</li>
+                    <li>{{ element.original_language }}</li>
+                    <li>{{ element.vote_average }}</li>
+                    <li><span :class="`fi fi-${mapLang(element.original_language)}`"></span></li>
                 </ul>
             </div>
         </div>
@@ -17,7 +26,8 @@
 <script>
 export default {
     props: {
-        films: Array
+        films: Array,
+        tvs: Array
     },
     methods:{
         mapLang(lang){
