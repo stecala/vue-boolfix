@@ -1,9 +1,9 @@
 <template>
-    <main class="container">
-        <div class="row mt-4">
+    <main class="container-fluid">
+        <div class="row">
             <div class="col-6">
                 <ul v-for="element in films" :key="element.id">
-                    <li><img :src="completePosterPath(element.poster_path)" :alt="element.title"></li>
+                    <li><img :src="completePosterPathW500(element.poster_path)" :alt="element.title"></li>
                     <li>{{ element.original_title }}</li>
                     <li>{{ element.title }}</li>
                     <li>{{ element.original_language }}</li>
@@ -13,7 +13,7 @@
             </div>
             <div class="col-6">
                 <ul v-for="element in tvs" :key="element.id">
-                    <li><img :src="completePosterPath(element.poster_path)" :alt="element.title"></li>
+                    <li><img :src="completePosterPathW500(element.poster_path)" :alt="element.title"></li>
                     <li>{{ element.original_name }}</li>
                     <li>{{ element.name }}</li>
                     <li>{{ element.original_language }}</li>
@@ -47,11 +47,25 @@ export default {
                     return 'jp'
                 case 'ko' :
                     return 'kr'
+                case 'el' :
+                    return 'gr'
+                case 'er' :
+                    return 'il'
+                case 'fa' :
+                    return 'ir'
+                case 'zh' :
+                    return 'cn'
+                case 'cs' :
+                    return 'cz'
+                case 'nb' :
+                    return 'no'
+                case 'hi':
+                    return 'in'
                 default :
                     return lang
             }
         },
-        completePosterPath(path){
+        completePosterPathW500(path){
             if(path != null || path == ''){
                 path = `https://image.tmdb.org/t/p/w500/${path}`
             }
@@ -87,13 +101,22 @@ export default {
                 default :
                     console.warn('voteIn5 non e\' riconosciuto ',{voteIn5})
             } 
-            return stars
-
+            return stars 
         } 
 
     }
 }
 </script>
-
 <style scoped lang="scss">
+@import '../assets/style/variable.scss';
+
+main{
+
+    min-height: calc(100vh - 100px);
+    background-color: $bgColorMain;
+     ul{
+        list-style-type: none;
+        border: 1px solid black;
+    }
+}
 </style>

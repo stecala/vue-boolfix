@@ -1,11 +1,11 @@
 <template>
-  <header class="bg-dark text-white">
-    <div class="container">
-      <div class="row align-items-center p-4">
-        <div class="col-4">
-          <h1>Header</h1>
+  <header>
+    <div class="container-fluid ">
+      <div class="row">
+        <div class="col-4 d-flex align-items-center mt-1">
+          <a href="#"><img src="/logo.png" alt="logo netflix"></a>
         </div>
-        <div class="col-8 text-end">
+        <div class="col-8 d-flex align-items-center justify-content-end">
           <input type="text" placeholder="Cerca un Film" v-model="filmSearched">
           <a class="btn btn-primary ms-2 " @click="sendFilmSearched()">Cerca</a>
         </div>
@@ -33,4 +33,12 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '../assets/style/variable.scss';
+header{
+  background-color: $bgColorMain;
+  height: 100px;
+  img{
+    width: 150px;
+  }
+}
 </style>

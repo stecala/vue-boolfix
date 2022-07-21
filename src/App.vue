@@ -61,11 +61,7 @@ export default {
 <style lang="scss">
 @import "~bootstrap/scss/bootstrap";
 @import "~flag-icons/css/flag-icons.css";
-
-*{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+body{
+  color: white;
 }
-
 </style>
