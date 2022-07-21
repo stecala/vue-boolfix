@@ -19,20 +19,27 @@ export default {
       apiLink : 'https://api.themoviedb.org/3/search/',
       movie : 'movie',
       txtSearch : '&query=fantozzi',
-      films : [],
+      filmsOriginalTitle : [],
+      filmsTitle : [],
+      filmsLanguage : [],
+      filmsRate : [],
       }
   },
   methods: {
     APICall() {
       axios.get(`${this.apiLink}${this.movie}${this.apiKey}${this.txtSearch}`)
       .then((result) => {
-        this.films = result.data.results[1].original_title
-        console.log(this.films)
+        this.filmsOriginalTitle = result.data.results[1].original_title
+        this.filmsTitle = result.data.results[1].title
+        this.filmsLanguage = result.data.results[1].original_language
+        this.filmsRate = result.data.results[1].vote_average
+        console.log({'titolo originale' : this.filmsOriginalTitle, 'titolo' : this.filmsTitle, 'lingua' : this.filmsLanguage, 'voto' : this.filmsRate})
       })
       .catch((error) => {
         console.warn(error)
       })
     },
+    
   },
   created (){
     this.APICall()
