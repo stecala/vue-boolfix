@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-dark text-white">
+  <header class="bg-dark text-white">
     <div class="container">
       <div class="row align-items-center p-4">
         <div class="col-4">
@@ -11,7 +11,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </header>
 </template>
 
 <script>

@@ -1,8 +1,9 @@
 <template>
-    <div class="container">
+    <main class="container">
         <div class="row mt-4">
             <div class="col-6">
                 <ul v-for="element in films" :key="element.id">
+                    <li><img :src="completePosterPath(element.poster_path)" :alt="element.title"></li>
                     <li>{{ element.original_title }}</li>
                     <li>{{ element.title }}</li>
                     <li>{{ element.original_language }}</li>
@@ -12,6 +13,7 @@
             </div>
             <div class="col-6">
                 <ul v-for="element in tvs" :key="element.id">
+                    <li><img :src="completePosterPath(element.poster_path)" :alt="element.title"></li>
                     <li>{{ element.original_name }}</li>
                     <li>{{ element.name }}</li>
                     <li>{{ element.original_language }}</li>
@@ -20,17 +22,19 @@
                 </ul>
             </div>
         </div>
-    </div>
+    </main>
 </template>
 
 <script>
 export default {
     props: {
         films: Array,
-        tvs: Array
+        tvs: Array,
     },
     methods:{
         mapLang(lang){
+            console.log(this.films)
+
             switch(lang){
                 case 'en' :
                     return 'gb'
@@ -41,6 +45,15 @@ export default {
                 default :
                     return lang
             }
+        },
+        completePosterPath(path){
+            if(path != null){
+                path = `https://image.tmdb.org/t/p/w500/${path}`
+            }
+            else{
+                path ='/defaultw-500.jpg'
+            }
+            return  path
         }, 
     }
 }

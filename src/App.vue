@@ -32,7 +32,6 @@ export default {
       axios.get(`${this.apiLink}${this.movie}${this.apiKey}${this.txtSearch}`)
       .then((result) => {
         this.films = result.data.results
-        console.log(this.films)
       })
       .catch((error) => {
         console.warn(error)
@@ -42,7 +41,6 @@ export default {
       axios.get(`${this.apiLink}${this.tv}${this.apiKey}${this.txtSearch}`)
       .then((result) => {
         this.tvs = result.data.results
-        console.log(this.tvs)
       })
       .catch((error) => {
         console.warn(error)
