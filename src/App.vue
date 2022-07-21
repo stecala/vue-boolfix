@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <HeaderApp />
+    <HeaderApp @filmSearched='setTxtSearched' />
   </div>
 </template>
 
@@ -18,7 +18,7 @@ export default {
       apiKey : '?api_key=290ef3b32debba72662776b92b209938',
       apiLink : 'https://api.themoviedb.org/3/search/',
       movie : 'movie',
-      txtSearch : '&query=fantozzi',
+      txtSearch : '',
       filmsOriginalTitle : [],
       filmsTitle : [],
       filmsLanguage : [],
@@ -29,20 +29,32 @@ export default {
     APICall() {
       axios.get(`${this.apiLink}${this.movie}${this.apiKey}${this.txtSearch}`)
       .then((result) => {
-        this.filmsOriginalTitle = result.data.results[1].original_title
-        this.filmsTitle = result.data.results[1].title
-        this.filmsLanguage = result.data.results[1].original_language
-        this.filmsRate = result.data.results[1].vote_average
+
+        this.filmsOriginalTitle=[]
+        this.filmsTitle=[]
+        this.filmsLanguage=[]
+        this.filmsRate=[]
+
+        for(let i=0; i< result.data.results.length; i++){
+          this.filmsOriginalTitle.push( result.data.results[i].original_title)
+          this.filmsTitle.push( result.data.results[i].title)
+          this.filmsLanguage.push( result.data.results[i].original_language)
+          this.filmsRate.push( result.data.results[i].vote_average) 
+        }
+        
         console.log({'titolo originale' : this.filmsOriginalTitle, 'titolo' : this.filmsTitle, 'lingua' : this.filmsLanguage, 'voto' : this.filmsRate})
       })
       .catch((error) => {
         console.warn(error)
       })
     },
-    
+    setTxtSearched(choice){
+      this.txtSearch = `&query=${choice}`
+      this.APICall()
+    },
   },
   created (){
-    this.APICall()
+    this.setTxtSearched(this.txtSearch)
   }
 }
 </script>
