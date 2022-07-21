@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-6">
                 <ul v-for="element in films" :key="element.id">
-                    <li><img :src="completePosterPathW500(element.poster_path)" :alt="element.title"></li>
+                    <li><img :src="completePosterPathW342(element.poster_path)" :alt="element.title"></li>
                     <li>{{ element.original_title }}</li>
                     <li>{{ element.title }}</li>
                     <li>{{ element.original_language }}</li>
@@ -13,7 +13,7 @@
             </div>
             <div class="col-6">
                 <ul v-for="element in tvs" :key="element.id">
-                    <li><img :src="completePosterPathW500(element.poster_path)" :alt="element.title"></li>
+                    <li><img :src="completePosterPathW342(element.poster_path)" :alt="element.title"></li>
                     <li>{{ element.original_name }}</li>
                     <li>{{ element.name }}</li>
                     <li>{{ element.original_language }}</li>
@@ -65,9 +65,9 @@ export default {
                     return lang
             }
         },
-        completePosterPathW500(path){
+        completePosterPathW342(path){
             if(path != null || path == ''){
-                path = `https://image.tmdb.org/t/p/w500/${path}`
+                path = `https://image.tmdb.org/t/p/w342/${path}`
             }
             else{
                 path ='/defaultw-500.jpg'
@@ -75,9 +75,7 @@ export default {
             return  path
         },
         changeValueVote(vote){
-            console.log(vote)
             let voteIn5 = Math.ceil((vote*5)/10)
-            console.log(voteIn5)
             let stars = ''
             switch(voteIn5){
                 case 0 :
