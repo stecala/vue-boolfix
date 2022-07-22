@@ -3,26 +3,40 @@
         <div class="row cont-card mx-auto">
             <h3>Lista dei film:</h3>
 
-            <div v-for="element in films" :key="element.id" class="img-card-size position-relative" >
+            <div v-for="element in films" :key="element.id" class="img-card-size position-relative"
+                @mouseleave="setFalseToIsActive() ; resetArray(creditsList) ; resetArray(movieGenreList)">
                 <img :src="completePosterPathW342(element.poster_path)" :alt="element.title"
                     class="display-inline-block">
-                <div class="position-absolute info pt-3 ps-3" v-if="(isActive==false)">
+                <div class="position-absolute info pt-3 ps-3" v-if="(isActive == false)">
                     <ul>
                         <li><span class="fw-bolder">Titolo Originale: </span>{{ element.original_title }}</li>
                         <li><span class="fw-bolder">Voto: </span>{{ changeValueVote(element.vote_average) }}</li>
                         <li><span class="fw-bolder">Panoramica: </span>{{ element.overview }}</li>
                     </ul>
                 </div>
-                <div class="position-absolute arrow-info" v-if="(isActive == false)" @click="changeStatusActive() ; getCreditsMovie(element.id)">
+                <div class="position-absolute arrow-info" v-if="(isActive == false)"
+                    @click="changeStatusActive() ; getCreditsMovie(element.id)">
                     <i class="fa-solid fa-angle-left"></i>
                 </div>
                 <div class="position-absolute arrow-info-active" v-else @click="changeStatusActive()">
                     <i class="fa-solid fa-angle-right"></i>
                 </div>
-                <div class="credits-container position-absolute" v-if="isActive">
-                    <ul>
-                        <li v-for="(name,index) in creditsList" :key="index">{{creditsList[index].name}}</li>
-                       
+                <div class="credits-container position-absolute pt-3 ps-3" v-if="isActive">
+                    <ul  class="my-padding">
+                        <li>Cast:
+                            <ul>
+                                <li v-for="(name, index) in creditsList" :key="index">{{ creditsList[index].name }}</li>
+
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="my-padding">
+                        <li >Generi:
+                            <ul>
+                                <li v-for="(id, index) in element.genre_ids" :key="index">{{ mapGenres(id) }}</li>
+
+                            </ul>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -39,7 +53,7 @@ export default {
             apiLink: 'https://api.themoviedb.org/3/movie/',
             apiKey: '/credits?api_key=290ef3b32debba72662776b92b209938',
             isActive: false,
-            creditsList : [],
+            creditsList: [],
         }
     },
     components: {
@@ -84,24 +98,31 @@ export default {
         },
         getCreditsMovie(id) {
             axios.get(this.apiLink + id + this.apiKey)
-            .then((result)=>{
-                this.creditsList = result.data.cast
-                this.creditsList.splice(5)
-                console.log(this.creditsList)
-            })
-            .catch((error)=>{
-                console.warn(error)
-            })
+                .then((result) => {
+                    this.creditsList = result.data.cast
+                    this.creditsList.splice(5)
+                })
+                .catch((error) => {
+                    console.warn(error)
+                })
         },
         changeStatusActive() {
             this.isActive = !this.isActive
         },
-        setFalseToIsActive(){
+        setFalseToIsActive() {
             this.isActive = false
+        },
+        resetArray(arrayToReset) {
+            arrayToReset = []
+            return arrayToReset
+        },
+        mapGenres(id) {
+            return this.movieGenreList.find(element => element.id == id).name
         }
     },
     props: {
         films: Array,
+        movieGenreList: Array,
     },
     created() {
 
@@ -166,11 +187,6 @@ export default {
             cursor: pointer;
         }
 
-        &:hover .arrow-info,
-        &:hover .arrow-info-active {
-            visibility: visible;
-        }
-
         .arrow-info-active {
             width: 30px;
             height: 30px;
@@ -186,15 +202,29 @@ export default {
             visibility: hidden;
             cursor: pointer;
         }
-        .credits-container{
+
+        .credits-container {
             width: 100%;
             height: 100%;
             top: 0;
             left: 12px;
             background-color: rgba(0, 0, 0, 0.8);
+            visibility: hidden;
+
+            ul {
+                list-style-type: none;
+
+            }
         }
 
+        &:hover .arrow-info,
+        &:hover .arrow-info-active,
+        &:hover .credits-container {
+            visibility: visible;
+        }
     }
-
+    .my-padding{
+        padding-left: 0;
+    }
 }
 </style>

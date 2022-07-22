@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <HeaderApp @filmSearched='setTxtSearched' />
-    <MainApp :films="films" :tvs="tvs" />
+    <MainApp :films="films" :tvs="tvs" :movieGenreList="movieGenreList" />
   </div>
 </template>
 
@@ -20,11 +20,13 @@ export default {
     return{
       apiKey : '?api_key=290ef3b32debba72662776b92b209938',
       apiLink : 'https://api.themoviedb.org/3/search/',
+      apiLinkGenreMovie : 'https://api.themoviedb.org/3/genre/movie/list',
       tv : 'tv',
       movie : 'movie',
       txtSearch : '',
       films : [],
       tvs : [],
+      movieGenreList :[]
       }
   },
   methods: {
@@ -46,10 +48,20 @@ export default {
         console.warn(error)
       })
     },
+    APICallGenre(){
+      axios.get(this.apiLinkGenreMovie+this.apiKey)
+      .then((result)=>{
+        this.movieGenreList = result.data.genres
+      })
+      .catch((error)=>{
+        console.warn(error``)
+      })
+    },
     setTxtSearched(choice){
       this.txtSearch = `&query=${choice}`
       this.APICallMovie()
       this.APICallTvs()
+      this.APICallGenre()
     },
   },
   created (){

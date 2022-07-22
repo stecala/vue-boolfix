@@ -1,7 +1,7 @@
 <template>
     <main class="container-fluid">
         <div class="row">
-            <FilmsCards :films="films" />
+            <FilmsCards :films="films" :movieGenreList="movieGenreList" />
             <TvsCards :tvs="tvs" />
         </div>
     </main>
@@ -18,6 +18,7 @@ export default {
     props: {
         films: Array,
         tvs: Array,
+        movieGenreList : Array,
     },
     data: function () {
         return {};
