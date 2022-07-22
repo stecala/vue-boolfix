@@ -1,8 +1,7 @@
 <template>
     <main class="container-fluid">
         <div class="row">
-            <div class="col-6">
-                <div >
+                <div>
                     <FilmsCard :films="films" />
                     <!-- <li><img :src="completePosterPathW342(element.poster_path)" :alt="element.title"></li>
                     <li>{{ element.original_title }}</li>
@@ -11,8 +10,8 @@
                     <li>{{ changeValueVote(element.vote_average) }}</li>
                     <li><span :class="`fi fi-${mapLang(element.original_language)}`"></span></li> -->
                 </div>
-            </div>
-            <div class="col-6">
+        </div>
+            <!-- <div class="col-6">
                 <ul v-for="element in tvs" :key="element.id">
                     <li><img :src="completePosterPathW342(element.poster_path)" :alt="element.title"></li>
                     <li>{{ element.original_name }}</li>
@@ -21,8 +20,7 @@
                     <li>{{ changeValueVote(element.vote_average) }}</li>
                     <li><span :class="`fi fi-${mapLang(element.original_language)}`"></span></li>
                 </ul>
-            </div>
-        </div>
+            </div> -->
     </main>
 </template>
 
