@@ -2,7 +2,7 @@
     <main class="container-fluid">
         <div class="row">
             <FilmsCards :films="films" :movieGenreList="movieGenreList" />
-            <TvsCards :tvs="tvs" />
+            <TvsCards :tvs="tvs" :tvsGenreList="tvsGenreList" />
         </div>
     </main>
 </template>
@@ -19,6 +19,7 @@ export default {
         films: Array,
         tvs: Array,
         movieGenreList : Array,
+        tvsGenreList : Array,
     },
     data: function () {
         return {};

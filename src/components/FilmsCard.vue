@@ -5,8 +5,7 @@
 
             <div v-for="element in films" :key="element.id" class="img-card-size position-relative"
                 @mouseleave="setFalseToIsActive()">
-                <img :src="completePosterPathW342(element.poster_path)" :alt="element.title"
-                    class="display-inline-block">
+                <img :src="completePosterPathW342(element.poster_path)" :alt="element.title">
                 <div class="position-absolute info pt-3 ps-3" v-if="(isActive == false)">
                     <ul>
                         <li><span class="fw-bolder">Titolo Originale: </span>{{ element.original_title }}</li>
