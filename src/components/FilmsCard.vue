@@ -4,7 +4,7 @@
             <h3>Lista dei film:</h3>
 
             <div v-for="element in films" :key="element.id" class="img-card-size position-relative"
-                @mouseleave="setFalseToIsActive() ; resetArray(creditsList) ; resetArray(movieGenreList)">
+                @mouseleave="setFalseToIsActive()">
                 <img :src="completePosterPathW342(element.poster_path)" :alt="element.title"
                     class="display-inline-block">
                 <div class="position-absolute info pt-3 ps-3" v-if="(isActive == false)">
@@ -34,7 +34,6 @@
                         <li >Generi:
                             <ul>
                                 <li v-for="(id, index) in element.genre_ids" :key="index">{{ mapGenres(id) }}</li>
-
                             </ul>
                         </li>
                     </ul>
@@ -97,6 +96,7 @@ export default {
             return stars;
         },
         getCreditsMovie(id) {
+            this.creditsList = []
             axios.get(this.apiLink + id + this.apiKey)
                 .then((result) => {
                     this.creditsList = result.data.cast
@@ -112,10 +112,7 @@ export default {
         setFalseToIsActive() {
             this.isActive = false
         },
-        resetArray(arrayToReset) {
-            arrayToReset = []
-            return arrayToReset
-        },
+     
         mapGenres(id) {
             return this.movieGenreList.find(element => element.id == id).name
         }

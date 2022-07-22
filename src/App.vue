@@ -58,10 +58,12 @@ export default {
       })
     },
     setTxtSearched(choice){
-      this.txtSearch = `&query=${choice}`
-      this.APICallMovie()
-      this.APICallTvs()
-      this.APICallGenre()
+      if(choice != ''){
+        this.txtSearch = `&query=${choice}`
+        this.APICallMovie()
+        this.APICallTvs()
+        this.APICallGenre()
+      }
     },
   },
   created (){
