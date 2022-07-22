@@ -94,7 +94,7 @@ export default {
             width: 100%;
             bottom: 0;
             left: 12px;
-            background-color: black;
+            background-color: rgba(0,0,0,0.8);
             visibility: hidden;
             ul{
                 padding-left: 0;
