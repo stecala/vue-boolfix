@@ -66,33 +66,7 @@ export default {
             }
         },
         
-        changeValueVote(vote) {
-            let voteIn5 = Math.ceil((vote * 5) / 10);
-            let stars = "";
-            switch (voteIn5) {
-                case 0:
-                    stars = "0";
-                    break;
-                case 1:
-                    stars = "⭐";
-                    break;
-                case 2:
-                    stars = "⭐⭐";
-                    break;
-                case 3:
-                    stars = "⭐⭐⭐";
-                    break;
-                case 4:
-                    stars = "⭐⭐⭐⭐";
-                    break;
-                case 5:
-                    stars = "⭐⭐⭐⭐⭐";
-                    break;
-                default:
-                    console.warn("voteIn5 non e' riconosciuto ", { voteIn5 });
-            }
-            return stars;
-        }
+        
     },
 }
 </script>
