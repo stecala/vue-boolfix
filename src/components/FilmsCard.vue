@@ -3,21 +3,27 @@
         <div class="row cont-card mx-auto">
             <h3>Lista dei film:</h3>
 
-            <div v-for="element in films" :key="element.id" class="img-card-size position-relative">
+            <div v-for="element in films" :key="element.id" class="img-card-size position-relative" >
                 <img :src="completePosterPathW342(element.poster_path)" :alt="element.title"
                     class="display-inline-block">
-                <div class="position-absolute info pt-3 ps-3">
+                <div class="position-absolute info pt-3 ps-3" v-if="(isActive==false)">
                     <ul>
                         <li><span class="fw-bolder">Titolo Originale: </span>{{ element.original_title }}</li>
                         <li><span class="fw-bolder">Voto: </span>{{ changeValueVote(element.vote_average) }}</li>
                         <li><span class="fw-bolder">Panoramica: </span>{{ element.overview }}</li>
                     </ul>
                 </div>
-                <div class="position-absolute arrow-info" v-if="(isActive == false)" @click="changeStatusActive()">
+                <div class="position-absolute arrow-info" v-if="(isActive == false)" @click="changeStatusActive() ; getCreditsMovie(element.id)">
                     <i class="fa-solid fa-angle-left"></i>
                 </div>
                 <div class="position-absolute arrow-info-active" v-else @click="changeStatusActive()">
                     <i class="fa-solid fa-angle-right"></i>
+                </div>
+                <div class="credits-container position-absolute" v-if="isActive">
+                    <ul>
+                        <li v-for="(name,index) in creditsList" :key="index">{{creditsList[index].name}}</li>
+                       
+                    </ul>
                 </div>
             </div>
         </div>
@@ -33,6 +39,7 @@ export default {
             apiLink: 'https://api.themoviedb.org/3/movie/',
             apiKey: '/credits?api_key=290ef3b32debba72662776b92b209938',
             isActive: false,
+            creditsList : [],
         }
     },
     components: {
@@ -77,15 +84,27 @@ export default {
         },
         getCreditsMovie(id) {
             axios.get(this.apiLink + id + this.apiKey)
+            .then((result)=>{
+                this.creditsList = result.data.cast
+                this.creditsList.splice(5)
+                console.log(this.creditsList)
+            })
+            .catch((error)=>{
+                console.warn(error)
+            })
         },
         changeStatusActive() {
             this.isActive = !this.isActive
+        },
+        setFalseToIsActive(){
+            this.isActive = false
         }
     },
     props: {
         films: Array,
     },
     created() {
+
     }
 }
 </script>
@@ -147,15 +166,16 @@ export default {
             cursor: pointer;
         }
 
-        &:hover .arrow-info {
+        &:hover .arrow-info,
+        &:hover .arrow-info-active {
             visibility: visible;
         }
 
         .arrow-info-active {
             width: 30px;
             height: 30px;
-            background-color: black;
-            color: red;
+            z-index: 3;
+            background-color: rgba(0, 0, 0, 0.8);
             border-radius: 50%;
             font-size: 1rem;
             top: 10px;
@@ -165,6 +185,13 @@ export default {
             align-items: center;
             visibility: hidden;
             cursor: pointer;
+        }
+        .credits-container{
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 12px;
+            background-color: rgba(0, 0, 0, 0.8);
         }
 
     }

@@ -12,7 +12,6 @@
           <Transition>
             <input type="text" placeholder="Cerca un Film, Serie TV" v-model="filmSearched" class="my-input-txt p-2 grow"
               @keyup.enter="sendFilmSearched()" v-if="isClickedInput" v-on:blur="changeStatusClickedInput()" autofocus>
-              
           </Transition>
         </div>
       </div>
