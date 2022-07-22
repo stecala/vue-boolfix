@@ -7,7 +7,7 @@
         </div>
         <div class="col-8 d-flex align-items-center justify-content-end  pe-4">
           <Transition>
-            <span @click="changeStatusClicked()" v-if="(isClicked == false)">🔍</span>
+            <span @click="changeStatusClicked()" v-if="(isClicked == false)" class="text-white"><i class="fa-solid fa-magnifying-glass"></i></span>
           </Transition>
           <Transition>
             <input type="text" placeholder="Cerca un Film, Serie TV" v-model="filmSearched" class="my-input-txt p-2 grow"
