@@ -70,7 +70,7 @@ export default {
                 path = `https://image.tmdb.org/t/p/w342/${path}`
             }
             else{
-                path ='/defaultw-500.jpg'
+                path ='/defaultw-342.jpg'
             }
             return  path
         },

@@ -6,8 +6,14 @@
           <a href="#"><img src="/logo.png" alt="logo netflix"></a>
         </div>
         <div class="col-8 d-flex align-items-center justify-content-end  pe-4">
-          <span @click="changeStatutsClicked()" v-if="(isClicked == false)">🔍</span>
-          <input type="text" placeholder="Cerca un Film, Serie TV" v-model="filmSearched" class="my-input-txt p-2" @keyup.enter="sendFilmSearched()" v-if="isClicked" v-on:blur="changeStatutsClicked()" ref="input">
+          <Transition>
+            <span @click="changeStatusClicked()" v-if="(isClicked == false)">🔍</span>
+          </Transition>
+          <Transition>
+            <input type="text" placeholder="Cerca un Film, Serie TV" v-model="filmSearched" class="my-input-txt p-2 grow"
+              @keyup.enter="sendFilmSearched()" v-if="isClickedInput" v-on:blur="changeStatusClickedInput()" autofocus>
+              
+          </Transition>
         </div>
       </div>
     </div>
@@ -21,18 +27,27 @@ export default {
   data: function () {
     return {
       filmSearched: '',
-      isClicked : false,
+      isClicked: false,
+      isClickedInput: false,
     }
   },
   methods: {
-  
+
     sendFilmSearched() {
       this.$emit('filmSearched', this.filmSearched)
       this.filmSearched = ''
     },
-    changeStatutsClicked(){
+    changeStatusClicked() {
       this.filmSearched = '',
-      this.isClicked = !this.isClicked
+        this.isClicked = !this.isClicked
+      setTimeout(() => { this.changeStatusClickedInput() }, 600)
+    },
+    changeStatusClickedInput() {
+      this.isClickedInput = !this.isClickedInput
+      if (this.isClickedInput == false) {
+
+        setTimeout(() => { this.isClicked = false }, 600)
+      }
     },
 
   },
@@ -41,19 +56,48 @@ export default {
 
 <style scoped lang="scss">
 @import '../assets/style/variable.scss';
-header{
+
+header {
   background-color: $bgColorMain;
   height: 100px;
-  span{
+
+  span {
     cursor: pointer;
   }
-  .my-input-txt{
+
+  .my-input-txt {
     background-color: $bgColorMain;
     color: white;
     border: solid 1px white;
   }
-  img{
+
+  img {
     width: 150px;
+  }
+
+  .v-enter-active,
+  .v-leave-active {
+    transition: opacity 0.2s ease-in;
+  }
+
+  .v-enter-from,
+  .v-leave-to {
+    opacity: 0;
+  }
+
+  .grow {
+    animation: grow 0.3s ease-in;
+  }
+
+  @keyframes grow {
+    from {
+      width: 0;
+      opacity: 0;
+    }
+    to {
+      width: 16%;
+      opacity: 1;	
+    }
   }
 }
 </style>
