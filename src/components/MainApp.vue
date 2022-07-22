@@ -1,17 +1,10 @@
 <template>
     <main class="container-fluid">
         <div class="row">
-                <div>
-                    <FilmsCard :films="films" />
-                    <!-- <li><img :src="completePosterPathW342(element.poster_path)" :alt="element.title"></li>
-                    <li>{{ element.original_title }}</li>
-                    <li>{{ element.title }}</li>
-                    <li>{{ element.original_language }}</li>
-                    <li>{{ changeValueVote(element.vote_average) }}</li>
-                    <li><span :class="`fi fi-${mapLang(element.original_language)}`"></span></li> -->
-                </div>
+            <FilmsCard :films="films" />
+            <TvsCard :tvs="tvs" />
         </div>
-            <!-- <div class="col-6">
+        <!-- <div class="col-6">
                 <ul v-for="element in tvs" :key="element.id">
                     <li><img :src="completePosterPathW342(element.poster_path)" :alt="element.title"></li>
                     <li>{{ element.original_name }}</li>
@@ -26,9 +19,11 @@
 
 <script>
 import FilmsCard from './FilmsCard.vue'
+import TvsCard from './TvsCard.vue'
 export default {
-    components : {
+    components: {
         FilmsCard,
+        TvsCard,
     },
     props: {
         films: Array,
@@ -65,19 +60,20 @@ export default {
                     return lang;
             }
         },
-        
-        
+
+
     },
 }
 </script>
 <style scoped lang="scss">
 @import '../assets/style/variable.scss';
 
-main{
+main {
 
     min-height: calc(100vh - 100px);
     background-color: $bgColorMain;
-     ul{
+
+    ul {
         list-style-type: none;
         border: 1px solid black;
     }
