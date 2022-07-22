@@ -1,29 +1,19 @@
 <template>
     <main class="container-fluid">
         <div class="row">
-            <FilmsCard :films="films" />
-            <TvsCard :tvs="tvs" />
+            <FilmsCards :films="films" />
+            <TvsCards :tvs="tvs" />
         </div>
-        <!-- <div class="col-6">
-                <ul v-for="element in tvs" :key="element.id">
-                    <li><img :src="completePosterPathW342(element.poster_path)" :alt="element.title"></li>
-                    <li>{{ element.original_name }}</li>
-                    <li>{{ element.name }}</li>
-                    <li>{{ element.original_language }}</li>
-                    <li>{{ changeValueVote(element.vote_average) }}</li>
-                    <li><span :class="`fi fi-${mapLang(element.original_language)}`"></span></li>
-                </ul>
-            </div> -->
     </main>
 </template>
 
 <script>
-import FilmsCard from './FilmsCard.vue'
-import TvsCard from './TvsCard.vue'
+import FilmsCards from './FilmsCard.vue'
+import TvsCards from './TvsCard.vue'
 export default {
     components: {
-        FilmsCard,
-        TvsCard,
+        FilmsCards,
+        TvsCards,
     },
     props: {
         films: Array,
