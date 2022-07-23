@@ -1,7 +1,7 @@
 <template>
   <div class="pt-4 container-fluid ps-4 mb-5 pb-5 ">
         <div class="row cont-card mx-auto">
-            <h3>Lista delle Serie più Popolari:</h3>
+            <h3>Serie del momento:</h3>
             <hr class="ms-2">
             <div v-for="element in mostPopularTvsList" :key="element.id" class="img-card-size position-relative">
                 <img :src="completePosterPathW342(element.poster_path)" :alt="element.title">

@@ -48,7 +48,6 @@ export default {
         setTimeout(() => { this.isClicked = false }, 600)
       }
     },
-
   },
 }
 </script>
