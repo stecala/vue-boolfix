@@ -1,7 +1,7 @@
 <template>
     <main class="container-fluid">
         <div class="row">
-            <MostPopular v-if="(films == '') || (tvs =='')" :mostPopularMoviesList="mostPopularMoviesList" />
+            <MostPopular v-if="(films == '') || (tvs =='')" :mostPopularMoviesList="mostPopularMoviesList" :mostPopularTvsList="mostPopularTvsList" />
             <FilmsCards :films="films" :movieGenreList="movieGenreList" />
             <TvsCards :tvs="tvs" :tvsGenreList="tvsGenreList" />
         </div>
@@ -24,6 +24,7 @@ export default {
         movieGenreList : Array,
         tvsGenreList : Array,
         mostPopularMoviesList : Array,
+        mostPopularTvsList : Array,
     },
     data: function () {
         return {};
