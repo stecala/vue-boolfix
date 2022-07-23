@@ -1,6 +1,7 @@
 <template>
     <main class="container-fluid">
         <div class="row">
+            <MostPopular v-if="(films == '') || (tvs =='')" :mostPopularMoviesList="mostPopularMoviesList" />
             <FilmsCards :films="films" :movieGenreList="movieGenreList" />
             <TvsCards :tvs="tvs" :tvsGenreList="tvsGenreList" />
         </div>
@@ -10,16 +11,19 @@
 <script>
 import FilmsCards from './FilmsCard.vue'
 import TvsCards from './TvsCard.vue'
+import MostPopular from './MostPopular.vue'
 export default {
     components: {
         FilmsCards,
         TvsCards,
+        MostPopular,
     },
     props: {
         films: Array,
         tvs: Array,
         movieGenreList : Array,
         tvsGenreList : Array,
+        mostPopularMoviesList : Array,
     },
     data: function () {
         return {};

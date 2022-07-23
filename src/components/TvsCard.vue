@@ -2,7 +2,7 @@
     <div class="pt-4 container-fluid ps-4 mb-5 pb-5" v-if="(tvs != '')">
         <div class="row cont-card mx-auto">
             <h3>Lista Serie Tv:</h3>
-
+            <hr class="ms-2">
             <div v-for="element in tvs" :key="element.id" class="img-card-size position-relative" @mouseleave="setFalseToIsActive()">
                 <img :src="completePosterPathW342(element.poster_path)" :alt="element.title">
                 <div class="position-absolute info pt-3 ps-3">

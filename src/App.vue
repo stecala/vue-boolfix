@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <HeaderApp @filmSearched='setTxtSearched' />
-    <MainApp :films="films" :tvs="tvs" :movieGenreList="movieGenreList" :tvsGenreList="tvsGenreList" />
+    <MainApp :films="films" :tvs="tvs" :movieGenreList="movieGenreList" :tvsGenreList="tvsGenreList" :mostPopularMoviesList="mostPopularMoviesList" />
   </div>
 </template>
 
@@ -22,6 +22,7 @@ export default {
       apiLink : 'https://api.themoviedb.org/3/search/',
       apiLinkGenreMovie : 'https://api.themoviedb.org/3/genre/movie/list',
       apiLinkGenreTvs : 'https://api.themoviedb.org/3/genre/tv/list',
+      apiLinkPopularMovies : 'https://api.themoviedb.org/3/movie/popular',
       tv : 'tv',
       movie : 'movie',
       txtSearch : '',
@@ -29,6 +30,7 @@ export default {
       tvs : [],
       movieGenreList :[],
       tvsGenreList : [],
+      mostPopularMoviesList : [],
       }
   },
   methods: {
@@ -68,6 +70,15 @@ export default {
         console.warn(error``)
       })
     },
+    APICallMostPopularMovies(){
+      axios.get(this.apiLinkPopularMovies+this.apiKey)
+      .then((result)=>{
+        this.mostPopularMoviesList = result.data.results
+      })
+      .catch((error)=>{
+        console.warn(error)
+      })
+    },
     setTxtSearched(choice){
       if(choice != ''){
         this.txtSearch = `&query=${choice}`
@@ -75,6 +86,9 @@ export default {
         this.APICallTvs()
         this.APICallGenreMovie()
         this.APICallGenreTvs()
+      }
+      else{
+        this.APICallMostPopularMovies()
       }
     },
   },
