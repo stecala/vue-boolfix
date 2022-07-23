@@ -74,6 +74,7 @@ export default {
       axios.get(this.apiLinkPopularMovies+this.apiKey)
       .then((result)=>{
         this.mostPopularMoviesList = result.data.results
+        this.mostPopularMoviesList.splice(4)
       })
       .catch((error)=>{
         console.warn(error)
