@@ -1,13 +1,13 @@
 <template>
-    <div class="pt-4 container-fluid ps-4 mb-5 pb-5 " v-if="(films != '')">
+    <div class="pt-4 container-fluid ps-4 mb-5 pb-5 " v-if="(films.length >= 1)">
         <div class="row cont-card mx-auto">
             <h3>Lista dei film:</h3>
             <hr class="ms-2">
-            <div v-for="element in films" :key="element.id" class="img-card-size position-relative"
-                @mouseleave="setFalseToIsActive()">
-                <img :src="completePosterPathW342(element.poster_path)" :alt="element.title">
+            <div v-for="element in films" :key="element.id" class="img-card-size position-relative" @mouseleave="setFalseToIsActive()"> 
+                <img :src="completePosterPathW342(element.poster_path)" :alt="element.title" class="my-poster"> 
                 <div class="position-absolute info pt-3 ps-3" v-if="(isActive == false)">
-                    <ul>
+                    <img :src="completePosterPathW342(element.backdrop_path)" alt="element.title" class="my-backposter">
+                    <ul class="mt-2">
                         <li><span class="fw-bolder">Titolo Originale: </span>{{ element.original_title }}</li>
                         <li><span class="fw-bolder">Voto: </span>{{ changeValueVote(element.vote_average) }}</li>
                         <li><span class="fw-bolder">Panoramica: </span>{{ element.overview }}</li>
@@ -138,22 +138,29 @@ export default {
         margin-right: 10px;
         margin-top: 10px;
 
-        img {
+        .my-poster {
             max-width: 342px;
             min-height: 513px;
+
         }
 
         .info {
             width: 100%;
+            height: 100%;
+            overflow-y: scroll;
+            overflow-x: hidden;
             bottom: 0;
             left: 12px;
-            background-color: rgba(0, 0, 0, 0.8);
+            background-color: $bgColorMain;
             visibility: hidden;
             text-shadow: 2px 2px black;
-
+            &::-webkit-scrollbar {
+                display: none;
+            }
             ul {
                 padding-left: 0;
                 list-style: none;
+                padding-top: calc(100% - 150px);
             }
 
         }
@@ -204,9 +211,12 @@ export default {
             height: 100%;
             top: 0;
             left: 12px;
-            background-color: rgba(0, 0, 0, 0.8);
+            background-color: $bgColorMain;
             visibility: hidden;
-
+            img{
+                width:342px;
+                height: 192px;
+            }
             ul {
                 list-style-type: none;
 
@@ -221,6 +231,11 @@ export default {
     }
     .my-padding{
         padding-left: 0;
+    }
+    .my-backposter{
+        margin-left: -16px;
+        position: fixed;
+        top: 0;
     }
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
     <main class="container-fluid">
         <div class="row">
-            <MostPopular v-if="(films == '') || (tvs =='')" :mostPopularMoviesList="mostPopularMoviesList" :mostPopularTvsList="mostPopularTvsList" />
+            <MostPopular v-if="(films.length == 0) && (tvs.length == 0)" :mostPopularMoviesList="mostPopularMoviesList" :mostPopularTvsList="mostPopularTvsList" />
             <FilmsCards :films="films" :movieGenreList="movieGenreList" />
             <TvsCards :tvs="tvs" :tvsGenreList="tvsGenreList" />
         </div>
