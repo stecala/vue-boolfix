@@ -1,9 +1,19 @@
 <template>
     <div class="pt-4 container-fluid ps-4 mb-5 pb-5" v-if="(tvs != '')">
         <div class="row cont-card mx-auto">
-            <h3>Lista Serie Tv:</h3>
+            <div class="col-6">
+                <h3>Lista Serie Tv:</h3>
+            </div>
+            <div class="col-6 pb-3">
+                <span>Scegli un genere:</span>
+                <select class="form-select w-50 d-inline-block ms-3" aria-label="Default select example" v-model="valueSelect">
+                    <option selected value="">Tutti</option>
+                    <option :value="element.id" v-for="(element , index) in tvsGenreList" :key="index">{{element.name}}</option>
+                </select>
+            </div>
             <hr class="ms-2">
-            <div v-for="element in tvs" :key="element.id" class="img-card-size position-relative" @mouseleave="setFalseToIsActive()">
+            <div v-if="(searchByGenre(valueSelect) == '' )">Nessun film rispetta il tuo filtro</div>
+            <div v-for="element in searchByGenre(valueSelect)" :key="element.id" class="img-card-size position-relative" @mouseleave="setFalseToIsActive()">
                 <img :src="completePosterPathW342(element.poster_path)" :alt="element.title">
                 <div class="position-absolute info pt-3 ps-3">
                     <img :src="completeBackPosterPathW342(element.backdrop_path)" alt="element.title" class="my-backposter">
@@ -52,6 +62,7 @@ export default {
             apiKey: '/credits?api_key=290ef3b32debba72662776b92b209938',
             isActive: false,
             creditsList: [],
+            valueSelect: '',
         }
     },
     methods: {
@@ -121,6 +132,12 @@ export default {
                 path = "/defaultbackw-342.png";
             }
             return path;
+        },
+        searchByGenre(genre){
+            if(genre==''){
+                return this.tvs
+            }
+            return this.tvs.filter((film)=> film.genre_ids.includes(genre))
         },
     },
     props: {
