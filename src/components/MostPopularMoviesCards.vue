@@ -36,7 +36,8 @@ export default {
         linkToYT(element){
             let link = element.original_title.replaceAll(' ','+')
             return  'https://www.youtube.com/results?search_query='+link+'+trailer'
-        }  
+        },
+        
     },
     data :  function(){
         return{

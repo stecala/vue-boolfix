@@ -6,7 +6,7 @@
             <div v-for="element in films" :key="element.id" class="img-card-size position-relative" @mouseleave="setFalseToIsActive()"> 
                 <img :src="completePosterPathW342(element.poster_path)" :alt="element.title" class="my-poster"> 
                 <div class="position-absolute info pt-3 ps-3" v-if="(isActive == false)">
-                    <img :src="completePosterPathW342(element.backdrop_path)" alt="element.title" class="my-backposter">
+                    <img :src="completeBackPosterPathW342(element.backdrop_path)" alt="element.title" class="my-backposter">
                     <ul class="mt-2">
                         <li><span class="fw-bolder">Titolo Originale: </span>{{ element.original_title }}</li>
                         <li><span class="fw-bolder">Voto: </span>{{ changeValueVote(element.vote_average) }}</li>
@@ -60,13 +60,22 @@ export default {
     methods: {
         completePosterPathW342(path) {
             if (path != null || path == "") {
-                path = `https://image.tmdb.org/t/p/w342/${path}`;
+                path = `https://image.tmdb.org/t/p/w342${path}`;
             }
             else {
                 path = "/defaultw-342.jpg";
             }
             return path;
         },
+        completeBackPosterPathW342(path){
+            if (path != null || path == "") {
+                path = `https://image.tmdb.org/t/p/w342/${path}`;
+            }
+            else {
+                path = "/defaultbackw-342.png";
+            }
+            return path;
+        }, 
         changeValueVote(vote) {
             let voteIn5 = Math.ceil((vote * 5) / 10);
             let stars = "";

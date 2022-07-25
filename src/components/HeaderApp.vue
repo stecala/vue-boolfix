@@ -3,7 +3,7 @@
     <div class="container-fluid ">
       <div class="row">
         <div class="col-4 d-flex align-items-center mt-1 ps-4">
-          <a href="#"><img src="/logo.png" alt="logo netflix"></a>
+          <a href="https://www.youtube.com/watch?v=li2WDMgHxD0"><img src="/logo.png" alt="logo netflix"></a>
         </div>
         <div class="col-8 d-flex align-items-center justify-content-end  pe-4">
           <Transition>

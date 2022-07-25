@@ -6,6 +6,7 @@
             <div v-for="element in tvs" :key="element.id" class="img-card-size position-relative" @mouseleave="setFalseToIsActive()">
                 <img :src="completePosterPathW342(element.poster_path)" :alt="element.title">
                 <div class="position-absolute info pt-3 ps-3">
+                    <img :src="completeBackPosterPathW342(element.backdrop_path)" alt="element.title" class="my-backposter">
                     <ul>
                         <li><span class="fw-bolder">Titolo Originale: </span>{{ element.original_name }}</li>
                         <li><span class="fw-bolder">Voto: </span>{{ changeValueVote(element.vote_average) }}</li>
@@ -111,7 +112,16 @@ export default {
         mapGenres(id){
             console.log(this.tvsGenreList)
             return this.tvsGenreList.find(element => element.id == id).name
-        }
+        },  
+        completeBackPosterPathW342(path){
+            if (path != null || path == "") {
+                path = `https://image.tmdb.org/t/p/w342/${path}`;
+            }
+            else {
+                path = "/defaultbackw-342.png";
+            }
+            return path;
+        },
     },
     props: {
         tvs: Array,
