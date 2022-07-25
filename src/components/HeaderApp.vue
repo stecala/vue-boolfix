@@ -38,11 +38,12 @@ export default {
     }
   },
   methods: {
-
+    //! this method emit the user search to app.vue and after the research the input type text became ''
     sendFilmSearched() {
       this.$emit('filmSearched', this.filmSearched)
       this.filmSearched = ''
     },
+    
     changeStatusClicked() {
       this.filmSearched = '',
         this.isClicked = !this.isClicked

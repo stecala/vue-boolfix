@@ -30,8 +30,8 @@ export default {
         return {};
     },
     methods: {
+        //! this method find some flags with different name and transform it in the same name of the library
         mapLang(lang) {
-            console.log(this.films);
             switch (lang) {
                 case "en":
                     return "gb";

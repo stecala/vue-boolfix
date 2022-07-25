@@ -24,6 +24,7 @@ export default {
         mostPopularMoviesList : Array,
     },
     methods:{
+        //! this method create a path for img and in case can't find the image set a new default img
         completePosterPathW342(path) {
             if (path != null || path == "") {
                 path = `https://image.tmdb.org/t/p/w342/${path}`;
@@ -33,6 +34,7 @@ export default {
             }
             return path;
         },
+        //! this method create a url replacing all the spaces with + and add the url of youtube
         linkToYT(element){
             let link = element.original_title.replaceAll(' ','+')
             return  'https://www.youtube.com/results?search_query='+link+'+trailer'

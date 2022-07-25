@@ -36,8 +36,9 @@ export default {
       }
   },
   methods: {
+    //! methods api call for movie, tv Series, Movie genre of movie/series and most popular
     APICallMovie() {
-      axios.get(`${this.apiLink}${this.movie}${this.apiKey}${this.txtSearch}`)
+      axios.get(this.apiLink+this.movie+this.apiKey+this.txtSearch)
       .then((result) => {
         this.films = result.data.results
       })
@@ -92,6 +93,7 @@ export default {
         console.warn(error)
       })    
     },
+    //! Method that do the api call to pass to created
     setTxtSearched(choice){
       if(choice != ''){
         this.txtSearch = `&query=${choice}`
@@ -113,6 +115,7 @@ export default {
 </script>
 
 <style lang="scss">
+//! importing bootstrap, library for flags and fonts
 @import "~bootstrap/scss/bootstrap";
 @import "~flag-icons/css/flag-icons.css";
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');

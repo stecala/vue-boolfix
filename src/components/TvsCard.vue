@@ -12,7 +12,11 @@
                 </select>
             </div>
             <hr class="ms-2">
+
+            <!-- This answer appeare if a searched film has no genre required -->
             <div v-if="(searchByGenre(valueSelect) == '' )">Nessun film rispetta il tuo filtro</div>
+
+            <!-- Card zone -->
             <div v-for="element in searchByGenre(valueSelect)" :key="element.id" class="img-card-size position-relative" @mouseleave="setFalseToIsActive()">
                 <img :src="completePosterPathW342(element.poster_path)" :alt="element.title">
                 <div class="position-absolute info pt-3 ps-3">
@@ -23,6 +27,8 @@
                         <li><span class="fw-bolder">Panoramica: </span>{{ element.overview }}</li>
                     </ul>
                 </div>
+
+                <!-- Arrows -->
                 <div class="position-absolute arrow-info" v-if="(isActive == false)"
                     @click="changeStatusActive() ; getCreditsTvs(element.id)">
                     <i class="fa-solid fa-angle-left"></i>
@@ -30,6 +36,8 @@
                 <div class="position-absolute arrow-info-active" v-else @click="changeStatusActive()">
                     <i class="fa-solid fa-angle-right"></i>
                 </div>
+
+                <!-- Credits zone and genre zone -->
                 <div class="credits-container position-absolute pt-3 ps-3" v-if="isActive">
                     <ul  class="my-padding">
                         <li>Cast:
@@ -66,6 +74,7 @@ export default {
         }
     },
     methods: {
+        //! methods that create a path for posters/backposters of the cards
         completePosterPathW342(path) {
             if (path != null || path == "") {
                 path = `https://image.tmdb.org/t/p/w342/${path}`;
@@ -75,6 +84,18 @@ export default {
             }
             return path;
         },
+        completeBackPosterPathW342(path){
+            if (path != null || path == "") {
+                path = `https://image.tmdb.org/t/p/w342/${path}`;
+            }
+            else {
+                path = "/defaultbackw-342.png";
+            }
+            return path;
+        },
+
+
+        //! method to transform vote from 10 to 5 and apply the correspondents stars  
         changeValueVote(vote) {
             let voteIn5 = Math.ceil((vote * 5) / 10);
             let stars = "";
@@ -102,13 +123,14 @@ export default {
             }
             return stars;
         },
+
+        //! with this method you can get the array of Credits calling an API
         getCreditsTvs(id){
             this.creditsList = []
             axios.get(this.apiLink + id + this.apiKey)
                 .then((result)=> {
                     this.creditsList = result.data.cast
                     this.creditsList.splice(5)
-                    console.log(this.creditsList)
                 })
             .catch((error)=>{
                 console.warn(error)
@@ -120,19 +142,13 @@ export default {
         setFalseToIsActive(){
             this.isActive = false
         },
+
+        //! this method search in movieGenreList to find a name by id 
         mapGenres(id){
-            console.log(this.tvsGenreList)
             return this.tvsGenreList.find(element => element.id == id).name
-        },  
-        completeBackPosterPathW342(path){
-            if (path != null || path == "") {
-                path = `https://image.tmdb.org/t/p/w342/${path}`;
-            }
-            else {
-                path = "/defaultbackw-342.png";
-            }
-            return path;
         },
+
+        //! this method filter films by genre 
         searchByGenre(genre){
             if(genre==''){
                 return this.tvs
