@@ -1,24 +1,5 @@
-# cue-boolfix
+# vue-boolfix
 
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+<div align="center">
+  <img width="550px" height="350px" src="https://user-images.githubusercontent.com/98908632/180827376-e0d63ee8-9080-4491-96fb-e91fa1209032.gif">
+</div>
