@@ -5,7 +5,7 @@
         <div class="col-4 d-flex align-items-center mt-1 ps-4">
           <a href="https://www.youtube.com/watch?v=li2WDMgHxD0"><img src="/logo.png" alt="logo netflix"></a>
         </div>
-        <div class="col-8 d-flex align-items-center justify-content-end  pe-4">
+        <div class="col-7 d-flex align-items-center justify-content-end pe-4">
           <Transition>
             <span @click="changeStatusClicked()" v-if="(isClicked == false)" class="text-white"><i class="fa-solid fa-magnifying-glass"></i></span>
           </Transition>
@@ -13,6 +13,13 @@
             <input type="text" placeholder="Cerca un Film, Serie TV" v-model="filmSearched" class="my-input-txt p-2 grow"
               @keyup.enter="sendFilmSearched()" v-if="isClickedInput" v-on:blur="changeStatusClickedInput()" autofocus>
           </Transition>
+        </div>
+        <div class="col-1 d-flex align-items-center justify-content-end">
+          <div class="row">
+              <div class="col-6">Bambini</div>
+              <div class="col-2"><i class="fa-solid fa-bell"></i></div>
+              <div class="col-4"><img src="https://i0.wp.com/ih0.redbubble.net/image.618379802.1473/flat,1000x1000,075,f.u2.jpg" alt="profile img" class="profile-pic"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -59,6 +66,10 @@ header {
   background-color: $bgColorMain;
   height: 100px;
 
+  .profile-pic{
+    width: 25px;
+    height: 25px;
+  }
   span {
     cursor: pointer;
   }
@@ -97,5 +108,6 @@ header {
       opacity: 1;	
     }
   }
+
 }
 </style>
