@@ -46,7 +46,7 @@ export default {
       })
     },
     APICallTvs(){
-      axios.get(`${this.apiLink}${this.tv}${this.apiKey}${this.txtSearch}`)
+      axios.get(this.apiLink+this.tv+this.apiKey+this.txtSearch)
       .then((result) => {
         this.tvs = result.data.results
       })
